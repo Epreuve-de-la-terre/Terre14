@@ -8,22 +8,34 @@ if (process.argv[2] == undefined) {
   return
 }
 
-let arg = [];
-let res = [];
-arg[0] = parseInt(process.argv[2])
-arg[1] = parseInt(process.argv[3])
-arg[2] = parseInt(process.argv[4])
-res = [arg.shift()]
+/* Permet de trier les nombres passés en argument de façon décroissante */
 
-while (arg.length != 0) {
-  if (arg[0] < res[0]) {
-    res.unshift(arg.shift())
-  } else if (arg[0] > res[0] && arg[0] > res[1]) {
-    res.push(arg.shift())
-  } else {
-    res.splice(1, 0, arg[0])
-    arg.shift()
-  }
+// Transformation Tableau de String en Tableau de Nombre
+process.argv.shift(process.argv[0]); process.argv.shift(process.argv[1]);
+
+let argString = process.argv;
+let argNumber = [];
+
+for (x = 0; x < argString.length; x++) {
+argNumber[x] = parseInt(argString[x]);
+}
+// Fin Transformation
+
+let arg = argNumber;
+let tab = [];
+
+let i = 0;
+let j = 0;
+
+while(arg.length != tab.length) {
+    if ((arg[i] <= tab[j]) || (tab[j] == undefined))  {
+      tab.splice(j, 0, arg[i]);
+      i++;
+      j = 0;
+    } else {
+      j++;
+    }
 }
 
-console.log(res[1] + " est la valeur au millieu")
+console.log(tab);
+console.log(tab[1] + " est la valeur au millieu")
